@@ -116,7 +116,7 @@ $(document).ready(function () {
   })
     .done(function (data) {
       sortedData = data.sort((a, b) => a.posicion - b.posicion);
-      filteredData = sortedData; // Inicialmente, los datos filtrados son todos los datos
+      filteredData = sortedData;
       const pages = Math.ceil(sortedData.length / rowsPerPage);
       renderPagination(pages);
       updatePage(currentPage);
@@ -132,4 +132,28 @@ $(document).ready(function () {
     .fail(function () {
       alert("Error al cargar los datos.");
     });
+
+  $(document).on("click", ".megusta-btn", function () {
+    let index = $(this).data("index");
+    let id = $(this).data("id");
+    let newMegustaValue = !sortedData[index].megusta;
+    sortedData[index].megusta = newMegustaValue;
+
+    let megustaText = newMegustaValue ? "Me gusta" : "No me gusta";
+    $(this).text(megustaText);
+
+    // Actualizar en el servidor
+    $.ajax({
+      url: `https://66da2e18f47a05d55be436e2.mockapi.io/appweb/musica/${id}`,
+      method: "PUT",
+      data: JSON.stringify({ megusta: newMegustaValue }),
+      contentType: "application/json",
+      success: function (response) {
+        console.log("Actualización exitosa:", response);
+      },
+      error: function (error) {
+        console.error("Error al actualizar:", error);
+      },
+    });
+  });
 });
