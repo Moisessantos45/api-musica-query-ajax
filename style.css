@@ -1,0 +1,16 @@
+.album-card {
+    margin: 10px;
+}
+.card-img-top {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.card-text {
+    font-size: 0.9rem;
+    color: #bbb;
+}
