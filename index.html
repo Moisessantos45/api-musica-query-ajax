@@ -28,9 +28,21 @@
       <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
           <a class="navbar-brand" href="#">CRUD MUSIC</a>
-          <a class="btn btn-outline-success my-2 my-sm-0" href="musica.html">
-            Me gusta
+          <a
+            class="btn btn-outline-success me-2"
+            type="submit"
+            href="musica.html"
+          >
+            Canciones
           </a>
+          <button
+            class="btn btn-outline-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#Modal"
+            style="visibility: hidden;"
+          >
+            Agregar Canción
+          </button>
         </div>
       </nav>
     </header>
@@ -149,7 +161,7 @@
 
       <!-- TABLA -->
       <div class="container mt-5">
-        <h1 class="text-black">Álbumes populares</h1>
+        <h1 class="text-black" style="text-align: center;">Mis me gusta</h1>
         <div class="row" id="albums-list"></div>
       </div>
     </main>

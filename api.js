@@ -27,6 +27,10 @@ $(document).ready(function () {
               ${item.megusta ? "Me gusta" : "No me gusta"}
             </button>
           </td>
+          <td>
+            <button class="btn btn-danger">Eliminar</button>
+            <button class="btn btn-warning">Editar</button>
+          </td>
         </tr>
       `);
     });
@@ -153,6 +157,65 @@ $(document).ready(function () {
       },
       error: function (error) {
         console.error("Error al actualizar:", error);
+      },
+    });
+  });
+
+  // $(document).on("click", "#addSongBtn-add", function () {
+  //   console.log("Botón de agregar canción clickeado");
+  // });
+
+  // $("#songForm").on("submit", function(e) {
+  //   e.preventDefault();
+  //   const songData = {
+  //     name: $("#songName").val(),
+  //     autor: $("#autor").val(),
+  //     genero: $("#genero").val(),
+  //     duracion: $("#duracion").val(),
+  //     imagen: $("#imagen").val(),
+  //     createdAt: new Date().toISOString(),
+  //   };
+  //   console.log("Datos de la canción:", songData);
+
+  //   $.ajax({
+  //     url: "https://66da2e18f47a05d55be436e2.mockapi.io/appweb/musica",
+  //     type: "POST",
+  //     data: JSON.stringify(songData),
+  //     contentType: "application/json",
+  //     success: function (response) {
+  //       alert("Canción agregada exitosamente!");
+  //       $("#Modal").modal("hide");
+  //     },
+  //     error: function (xhr, status, error) {
+  //       alert("Error al agregar la canción: " + error);
+  //     },
+  //   });
+  // });
+
+  $("#songForm").on("submit", function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    formData.append('createdAt', new Date().toISOString());
+
+    // Mostrar los datos que se van a enviar
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
+    $.ajax({
+      url: "https://66da2e18f47a05d55be436e2.mockapi.io/appweb/musica",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        alert("Canción agregada exitosamente!");
+        $("#Modal").modal("hide");
+        $("#songForm")[0].reset();
+      },
+      error: function(xhr, status, error) {
+        alert("Error al agregar la canción: " + error);
       },
     });
   });
